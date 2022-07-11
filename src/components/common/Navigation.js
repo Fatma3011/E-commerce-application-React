@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom'
+import {Link,useLocation} from 'react-router-dom'
 import { getAllCategory } from '../../services/Category';
 export const Navigation = () => {
     const [categories, setCategories] = useState([]);
-    
+    const location = useLocation();
+    console.log(location) ;
     useEffect(() => {        
         getAllCategory().then((res)=>
             {

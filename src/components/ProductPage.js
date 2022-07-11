@@ -5,10 +5,8 @@ import { Navigation } from './common/Navigation';
 export const ProductPage = () => {
     return(
         <>
-            <Header />
-            <Navigation />
-            <h1>Product Page</h1>
-            <Footer />
+            <h1>Product Page (Fiche Produit)</h1>
+
         </>
     );
 };

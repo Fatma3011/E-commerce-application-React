@@ -6,10 +6,8 @@ export const CartPage = () => {
     return(
 
         <>
-            <Header />
-            <Navigation />
             <h1>Cart Page</h1>
-            <Footer />
+
         </>
     );
 };
