@@ -5,12 +5,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import { Routess } from './routes/routes';
-
+import { Provider } from 'react-redux';
+import store  from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Routess/>
+    <Provider store={store}>
+      <Routess />
+    </Provider>
   </React.StrictMode>
 );
 

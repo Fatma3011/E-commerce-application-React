@@ -1,10 +1,18 @@
-import React, {useRef, useState} from 'react';
-import { getProductsSearch2, getProductsSearch } from '../../services/ProductService';
-import {Link} from 'react-router-dom'
+import React, {useEffect, useRef, useState} from 'react';
+import { getProductsSearch } from '../../services/ProductService';
+import {useSelector,useDispatch} from 'react-redux';
+import {Link ,useNavigate } from 'react-router-dom'
+import { setCartId } from '../../redux/reducers/cart/cartActions';
 
 export const Header = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const cartId = useSelector(state => state.cartId);
     const [searchField, setSearchFields] = useState('');
-
+    useEffect(()=>{
+        
+        dispatch(setCartId());
+    },[])
     const  formSubmitSearch = event => {
         console.log(searchField);  
         //console.log(getProductsSearch(searchField)); RETURN PROMISE <PENDING> WE SHOULD WRITE .THEN
@@ -22,7 +30,10 @@ export const Header = () => {
     const inputHandler = event => {
         setSearchFields(event.target.value);
     }
-    
+    const goToCart = event =>{
+        navigate(`/cart/${cartId}`);
+     
+    }
 
     return (
         <div>
@@ -42,7 +53,7 @@ export const Header = () => {
                         </div>
                         <div className="col-sm-4">
                             <div className="shopping-item">
-                                <Link to="/cart">
+                                <Link to="/cart" onClick={goToCart}>
                                     Cart :  <span className="cart-amunt">100.58 €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">5</span>
                                 </Link>
                             </div>

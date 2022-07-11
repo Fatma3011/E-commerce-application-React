@@ -1,8 +1,9 @@
-import {ApiCaller} from './ApiCaller/apiCaller'
+import ApiCaller from './ApiCaller/apiCaller'
+import { API_BASE_URL } from '../constants/const';
 
-export const getCartId = () => {
+export const getCartId = (url) => {
     return new Promise((resolve, reject) => {
-            ApiCaller.post('/carts')
+            ApiCaller.post(API_BASE_URL + url)
             .then((response) => {
               resolve(response.data);
             })

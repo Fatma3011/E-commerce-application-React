@@ -4,7 +4,6 @@ import { getAllCategory } from '../../services/Category';
 export const Navigation = () => {
     const [categories, setCategories] = useState([]);
     const location = useLocation();
-    console.log(location) ;
     useEffect(() => {        
         getAllCategory().then((res)=>
             {
