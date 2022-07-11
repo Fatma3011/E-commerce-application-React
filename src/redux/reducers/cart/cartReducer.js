@@ -3,7 +3,7 @@ import {
 } from '../../actionTypes'
 
 const initialState = {
-    cartId: "fff",
+    cartId: "",
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -12,5 +12,8 @@ const cartReducer = (state = initialState, action) => {
                 cartId: action.id,
             }
         }
+    return {
+            cartId: "",
+    }
     }
 export default cartReducer

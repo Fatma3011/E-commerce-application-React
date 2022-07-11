@@ -1,9 +1,9 @@
 import { API_BASE_URL } from '../constants/const';
 import ApiCaller from './ApiCaller/apiCaller'
 
-export const getAllCategory = async () => {
+export const getAllCategory = async (url) => {
 
-    const data = await ApiCaller.get(API_BASE_URL+'categories')
+    const data = await ApiCaller.get(API_BASE_URL + url)
     return data.data;
 
 };

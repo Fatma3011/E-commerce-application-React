@@ -14,14 +14,17 @@ export const Carrousel = () => {
             <div className='col-lg-8'>
                 <Slider {...settings}>
                     <div>
-                        <img class="d-block w-100" src="/assets/img/h4-slide.png" alt="First slide" />
+                        <div>
+                            <img className="d-block w-100" src="/assets/img/h4-slide.png" alt="First slide" />
+                        </div>
+                        <div>
+                            <img className="d-block w-100" src="/assets/img/h4-slide2.png" alt="Second slide" />
+                        </div>
+                        <div>
+                            <img className="d-block w-100" src="/assets/img/h4-slide3.png" alt="Third slide" />
+                        </div>
                     </div>
-                    <div>
-                        <img class="d-block w-100" src="/assets/img/h4-slide2.png" alt="Second slide" />
-                    </div>
-                    <div>
-                        <img class="d-block w-100" src="/assets/img/h4-slide3.png" alt="Third slide" />
-                    </div>
+
                 </Slider>
                 
 

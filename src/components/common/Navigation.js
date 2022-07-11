@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {Link,useLocation} from 'react-router-dom'
-import { getAllCategory } from '../../services/Category';
+import {useSelector,useDispatch} from 'react-redux';
+import { getAllCategory } from '../../services/CategoryService';
+import { setCategories } from '../../redux/reducers/category/categoryActions';
 export const Navigation = () => {
-    const [categories, setCategories] = useState([]);
+   // const [categories, setCategories] = useState([]);
+    const dispatch = useDispatch();
+    const categories = useSelector(state => state.categories);
     const location = useLocation();
-    useEffect(() => {        
+   /* useEffect(() => {        
         getAllCategory().then((res)=>
             {
                 console.log(res);
@@ -12,7 +16,11 @@ export const Navigation = () => {
             });
         console.log(categories);
         
-    },[])
+    },[])*/
+    /*console.log(categories)
+    useEffect(()=>{
+        dispatch(setCategories());
+    },[])*/
 
     return(
         <div>
@@ -26,8 +34,8 @@ export const Navigation = () => {
                                         Home
                                     </Link>
                                 </li>
-                                {categories.map((item, index)=>(
-                                    <li>
+                                {categories && categories.map((item, index)=>(
+                                    <li key={index}>
                                         <Link to={`/product-list/${item.id}`}>
                                             {item.name}
                                         </Link>

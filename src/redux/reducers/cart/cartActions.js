@@ -4,9 +4,8 @@ import {
 } from '../../actionTypes'
 
 export function setCartId() {
-    let url = "/cart/";
-    //todo recuperer comingFrom
-    
+    const url = "carts";
+
     return function (dispatch) {
         getCartId(url)
             .then(response => {
@@ -15,7 +14,7 @@ export function setCartId() {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                console.log("ERROR");
             })
     }
 

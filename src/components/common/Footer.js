@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
-import { getAllCategory } from '../../services/Category';
+import { getAllCategory } from '../../services/CategoryService';
 export const Footer = () => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {        
@@ -28,7 +28,7 @@ export const Footer = () => {
                             <h2 className="footer-wid-title">Categories </h2>
                             <ul>
                                 {categories.map((item, index)=>(
-                                    <li>
+                                    <li key={index}>
                                         <Link to={`/product-list/${item.id}`}>
                                             {item.name}
                                         </Link>
