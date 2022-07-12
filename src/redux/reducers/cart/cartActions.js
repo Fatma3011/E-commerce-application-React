@@ -1,4 +1,4 @@
-import { getCartId } from '../../../services/CartService';
+import { getCartId, getCartData } from '../../../services/CartService';
 import {
     SET_CART_ID,
     SET_CART_DATA,
@@ -24,7 +24,7 @@ export function setCartData(id) {
     const url = "cart/";
 
     return function (dispatch) {
-        getCartId(url +id)
+        getCartData(url +id)
             .then(response => {
                 dispatch({
                     type: SET_CART_DATA, data: response.data

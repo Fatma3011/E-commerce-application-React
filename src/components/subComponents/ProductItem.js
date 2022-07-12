@@ -23,6 +23,7 @@ export const ProductItem = (props) => {
                 <ViewAllButton />
                 {products && products.map((item, index) => (
                     <div className="single-wid-product" key={index}>
+
                         <Link to={`/product/${item.id}`}>
 
                             <img src={`/assets/img/${item.imageName}`} alt="" className="product-thumb" />
