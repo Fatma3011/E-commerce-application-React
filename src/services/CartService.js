@@ -12,3 +12,15 @@ export const getCartId = (url) => {
             });
     });
   };
+  export const getCartData = (url) => {
+    return new Promise((resolve, reject) => {
+            ApiCaller.get(API_BASE_URL + url)
+            .then((response) => {
+              resolve(response.data);
+            })
+            .catch((error) => {
+                console.error('ERROR')
+            });
+    });
+  };
+  

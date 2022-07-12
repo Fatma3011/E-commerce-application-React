@@ -9,12 +9,7 @@ export const LayoutTopProduct = () => {
                     <div className="col-md-4">
                         <TopProduct top="Top Sellers" />
                     </div>
-                    <div className="col-md-4">
-                        <TopProduct top="Recently Viewed" />
-                    </div>
-                    <div className="col-md-4">
-                        <TopProduct top="Top New" />
-                    </div>
+                    
                 </div>
             </div>
         </div>

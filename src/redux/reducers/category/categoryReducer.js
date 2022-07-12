@@ -8,13 +8,12 @@ const initialState = {
 
 const categoryReducer = (state = initialState, action) => {
     if (action.type === SET_CARTEGORIES) {
-        console.log("hi")
             return {
                 categories: action.categories,
             }
         }
     return {
-        categories: [],
+        categories: state.categories,
     }
     }
 export default categoryReducer

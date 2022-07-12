@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
-import { getAllCategory } from '../../services/CategoryService';
 export const Footer = () => {
-    const [categories, setCategories] = useState([]);
-    useEffect(() => {        
-        getAllCategory().then((res)=>
-            {
-                console.log(res);
-                setCategories(res); 
-            });
-        console.log(categories);
-        
-    },[])
+    const categories = useSelector(state => state.category.categories);
     return(
         <div className="footer-top-area">
             <div className="zigzag-bottom" />

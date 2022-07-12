@@ -1,18 +1,19 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { getProductsSearch } from '../../services/ProductService';
 import {useSelector,useDispatch} from 'react-redux';
-import {Link ,useNavigate } from 'react-router-dom'
-import { setCartId } from '../../redux/reducers/cart/cartActions';
+import {Link  } from 'react-router-dom'
+import { setCartId, setCartData } from '../../redux/reducers/cart/cartActions';
 
 export const Header = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const cartId = useSelector(state => state.cartId);
+    const cartId = useSelector(state => state.cart.cartId);
+    const cartData = useSelector(state => state.cart.data);
     const [searchField, setSearchFields] = useState('');
+    console.log(cartData)
     useEffect(()=>{
-        
         dispatch(setCartId());
-    },[])
+        dispatch(setCartData(cartId));
+    },[dispatch])
     const  formSubmitSearch = event => {
         console.log(searchField);  
         //console.log(getProductsSearch(searchField)); RETURN PROMISE <PENDING> WE SHOULD WRITE .THEN
@@ -30,10 +31,6 @@ export const Header = () => {
     const inputHandler = event => {
         setSearchFields(event.target.value);
     }
-    const goToCart = event =>{
-        navigate(`/cart/${cartId}`);
-     
-    }
 
     return (
         <div>
@@ -43,7 +40,7 @@ export const Header = () => {
                         <div className="col-sm-4">
                             <div className="logo" style={{ width: 100, height: 100 }}>
                                 <h1>
-                                    <Link to="/home"><img src="/assets/img/logo.png" /></Link>
+                                    <Link to="/home"><img alt ="" src="/assets/img/logo.png" /></Link>
                                 </h1>
                             </div>
                         </div>
@@ -52,11 +49,12 @@ export const Header = () => {
                             <input type="button" onClick={formSubmitSearch}  defaultValue="Search" />
                         </div>
                         <div className="col-sm-4">
+                        {cartId &&
                             <div className="shopping-item">
-                                <Link to="/cart" onClick={goToCart}>
+                            <Link to={ `/cart/${cartId}` }>
                                     Cart :  <span className="cart-amunt">100.58 €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">5</span>
                                 </Link>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>

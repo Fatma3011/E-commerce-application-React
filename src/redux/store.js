@@ -1,10 +1,9 @@
-import {createStore,applyMiddleware, combineReducers} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
-import combinedReducer from './combineReducers';
-import cartReducer from './reducers/cart/cartReducer';
+import redux from './combineReducers';
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
-let store = createStore(cartReducer,composedEnhancer);
+let store = createStore(redux,composedEnhancer);
 export default store;

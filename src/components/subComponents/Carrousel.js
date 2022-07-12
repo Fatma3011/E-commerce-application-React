@@ -24,10 +24,7 @@ export const Carrousel = () => {
                             <img className="d-block w-100" src="/assets/img/h4-slide3.png" alt="Third slide" />
                         </div>
                     </div>
-
                 </Slider>
-                
-
             </div>
             <div className='col-lg-2'></div>
         </div>

@@ -1,6 +1,7 @@
 import { getCartId } from '../../../services/CartService';
 import {
     SET_CART_ID,
+    SET_CART_DATA,
 } from '../../actionTypes'
 
 export function setCartId() {
@@ -11,6 +12,22 @@ export function setCartId() {
             .then(response => {
                 dispatch({
                     type: SET_CART_ID, id: response.id
+                });
+            })
+            .catch((error) => {
+                console.log("ERROR");
+            })
+    }
+
+}
+export function setCartData(id) {
+    const url = "cart/";
+
+    return function (dispatch) {
+        getCartId(url +id)
+            .then(response => {
+                dispatch({
+                    type: SET_CART_DATA, data: response.data
                 });
             })
             .catch((error) => {
