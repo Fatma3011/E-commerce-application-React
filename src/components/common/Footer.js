@@ -19,7 +19,7 @@ export const Footer = () => {
                             <ul>
                                 {categories.map((item, index)=>(
                                     <li key={index}>
-                                        <Link to={`/product-list/${item.id}`}>
+                                        <Link to={`/product-list/${item.productListId}`}>
                                             {item.name}
                                         </Link>
                                     </li>

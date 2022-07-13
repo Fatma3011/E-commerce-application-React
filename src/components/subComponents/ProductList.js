@@ -1,71 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductByCategory } from '../../services/CategoryService';
+import { getProductsSearch } from '../../services/ProductService';
 import { ProductCard } from './ProductCard';
 import { Title } from './Title';
 export const ProductList = () => {
 
   const { categoryId } = useParams();
-
-  const [productByCategory, setProductByCategory] = useState([]);
-  const [categoryName, setCategoryName] = useState("");
-
-  console.log(productByCategory)
+  const [products, setProducts] = useState([]);
+  const [title, setTitle] = useState("");
   useEffect(() => {
-    getProductByCategory(categoryId).then((res) => { setProductByCategory(res.items); setCategoryName(res.name) })
-
-  }, [])
-
-  const productRows = () => {
-    let index = 0;
-    let items = [];
-    let list = [];
-    let data=[];
-    while (index < (productByCategory.length - productByCategory.length % 4)) {
-      data = productByCategory[index];
-      items =[];
-      for (let i = 1; i <= 4; i++) {
-        items.push(
-          <ProductCard categoryName={categoryName} id={productByCategory[index+i].id}
-            image={productByCategory[index+i].imageName}
-            name={productByCategory[index+i].name}
-            price={productByCategory[index+i].price}
-            review={productByCategory[index+i].review}
-            discountRate={productByCategory[index+i].discountRate}
-          />);
-      }
-      index += 4;
-      list.push(items);
+    if ( categoryId.includes("search")){
+      const searchWord = categoryId.substr(7);
+      getProductsSearch(searchWord).then(function(result) {
+        setProducts(result); 
+        setTitle(`Search result of '${searchWord}'`);
+     })
     }
-    items= [];
-    if (index < productByCategory.length) {
-      for (let i = index; i < productByCategory.length; i++) {
-        items.push(
-          <ProductCard categoryName={categoryName} id={data.id}
-            image={data.imageName}
-            name={data.name}
-            price={data.price}
-            review={data.review}
-            discountRate={data.discountRate}
-          />)
-      }
-      list.push(items);
+    else{
+      getProductByCategory(categoryId).then((res) => { 
+        setProducts(res.items); 
+        setTitle(res.name) })
     }
-    return list;
-  }
+    
+  }, [categoryId])
 
   return (
     <>
-      <Title categoryName={categoryName} />
+      <Title categoryName={title} />
       <div className="single-product-area">
         <div className="zigzag-bottom" />
         <div className="container">
-          {productByCategory !== [] && productRows().map((item, index) => (
-              <div className='row'>
-                {item}
-              </div>
+        <div className='row'>
+          {products?.map((item, index) => (
+              <ProductCard categoryName={title} id={item.id}
+              image={item.imageName}
+              name={item.name}
+              price={item.price}
+              review={item.review}
+              discountRate={item.discountRate}
+              key={index}
+            />
               ))
             }
+             </div>
         </div>
       </div>
     </>

@@ -1,9 +1,22 @@
+import { useState, useEffect } from "react";
 import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux';
-export const Navigation = () => {
+import { useLocation } from 'react-router-dom';
+
+export const Navigation = (props) => {
+    const {pathname} = useLocation();
+    const location = pathname.substr(0,7); 
+    const [visibility, setVisibility] = useState(true);
+    useEffect(()=>{
+        if (location === "/carts/"){
+            setVisibility(false);
+        }
+        else {setVisibility(true);}
+    }
+    ,[pathname])
     const categories = useSelector(state => state.category.categories);
     return(
-        <div>
+        visibility && <div>
             <div className="mainmenu-area">
                 <div className="container">
                     <div className="row">
@@ -16,7 +29,7 @@ export const Navigation = () => {
                                 </li>
                                 {categories && categories.map((item, index)=>(
                                     <li key={index}>
-                                        <Link to={`/product-list/${item.productListId}`}>
+                                        <Link to={`/product-list/${item.productListId}`} >
                                             {item.name}
                                         </Link>
                                     </li>

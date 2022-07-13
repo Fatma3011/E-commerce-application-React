@@ -8,7 +8,6 @@ export function setCategories() {
     return function (dispatch) {
         getAllCategory(url)
             .then(response => {
-                console.log(response)
                 dispatch({
                     type: SET_CARTEGORIES, 
                     categories: response

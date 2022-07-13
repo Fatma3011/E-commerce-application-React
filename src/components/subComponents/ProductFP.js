@@ -1,16 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getProductData } from '../../services/ProductService';
 export const ProductFP = () => {
+    const {productId} = useParams();
     const [ productData, setProductData] = useState([]);
+    const items = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    let productItem ={}
+    let result = [];
+    const [ filteredProduct, setFilteredProduct] =  useState(false);
     useEffect(()=>{
-        getProductData.then((response)=>{setProductData(response)})
+        getProductData(productId).then((response)=>{
+            setProductData(response);
+            result = items.filter(item => {
+                return item.id === response.id;
+              });
+              console.log(result.length)
+            if (result.length === 0) {
+                setFilteredProduct (true) ;
+            }
+            if (filteredProduct){
+                console.log("in if");
+                productItem = {
+                    discountRate: response.discountRate,
+                    id: response.id,
+                    imageName: response.imageName,
+                    name: response.name,
+                    review: response.review,
+                    price: response.price
+                 }
+                items.push(productItem);
+                localStorage.setItem('recentlyViewed', JSON.stringify(items));
+            }
+           
+        })
+        
+        
+        
     },[]);
-    /*object
-    useEffect(() => {
-    const existingProducts = JSON.parse(localstorage.getItem('recentlyViewed')) || [];
-    existingProducts.push(object);
-    localStorage.setItem('recentlyViewed', JSON.stringify(items));
-    }, [items]);*/
+    
     return(
         <div className="product-content-right">
             <div className="product-breadcroumb">

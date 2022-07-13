@@ -6,28 +6,35 @@ import {
 
 export function setCartId() {
     const url = "carts";
-
+    
     return function (dispatch) {
         getCartId(url)
             .then(response => {
                 dispatch({
                     type: SET_CART_ID, id: response.id
                 });
+                getCartData(url + "/" + response.id).then(response => {
+                    console.log("response cart Data", response)
+                    dispatch({
+                        type: SET_CART_DATA, data: response
+                    });
+                });
+                
             })
             .catch((error) => {
                 console.log("ERROR");
             })
     }
 
-}
+} 
 export function setCartData(id) {
-    const url = "cart/";
+    const url = "carts/";
 
     return function (dispatch) {
         getCartData(url +id)
-            .then(response => {
+            .then(response => {  
                 dispatch({
-                    type: SET_CART_DATA, data: response.data
+                    type: SET_CART_DATA, data: response
                 });
             })
             .catch((error) => {
@@ -36,3 +43,4 @@ export function setCartData(id) {
     }
 
 }
+

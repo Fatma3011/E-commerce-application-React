@@ -4,6 +4,10 @@ import { ProductItem } from './ProductItem';
 export const TopProduct = (props) => {
     const [topSellers, setTopSellers] = useState([]);
     const [topNew, setTopNew] = useState([]);
+    const [recentlyViewedProducts , setRecentlyViewedProducts] = useState([]);
+    console.log(recentlyViewedProducts);
+
+
     useEffect(()=>{
         getTopProducts('top-sellers-products').then((response) => {
             setTopSellers(response);
@@ -11,6 +15,8 @@ export const TopProduct = (props) => {
         getTopProducts('top-new-products').then((response) => {
             setTopNew(response);
          });
+        setRecentlyViewedProducts (JSON.parse(localStorage.getItem('recentlyViewed')));
+        console.log(recentlyViewedProducts);
         
     }, [])
     return (
@@ -20,9 +26,8 @@ export const TopProduct = (props) => {
                 <div className="row">
                     
                             <ProductItem title ="Top Sellers" products={topSellers} />
-                        
                     
-                            <ProductItem title ="Recently Viewed" />
+                            <ProductItem title ="Recently Viewed" products = {recentlyViewedProducts} />
                        
                             <ProductItem title ="Top New" products={topNew} />
                         

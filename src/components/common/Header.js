@@ -1,39 +1,50 @@
 import React, {useEffect, useState} from 'react';
-import { getProductsSearch } from '../../services/ProductService';
-import {useSelector,useDispatch} from 'react-redux';
-import {Link  } from 'react-router-dom'
-import { setCartId, setCartData } from '../../redux/reducers/cart/cartActions';
+import { useLocation } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom'
+import { setCartData } from '../../redux/reducers/cart/cartActions';
+import { getCartId } from '../../services/CartService';
 
-export const Header = () => {
+export const Header = (props) => {
+    const {pathname} = useLocation();
+    const location = pathname.substr(0,7); 
+    const [visibility, setVisibility] = useState(true);
     const dispatch = useDispatch();
-    const cartId = useSelector(state => state.cart.cartId);
-    const cartData = useSelector(state => state.cart.data);
-    const [searchField, setSearchFields] = useState('');
-    console.log(cartData)
+    const [searchField, setSearchField] = useState('');
+    const navigate = useNavigate();
+    const cartId =  localStorage.getItem('cartId');
     useEffect(()=>{
-        dispatch(setCartId());
-        dispatch(setCartData(cartId));
-    },[dispatch])
+        const url = "carts";
+        if (!cartId){
+            getCartId(url)
+                .then(response => {
+                    localStorage.setItem('cartId', response.id);
+                    dispatch(setCartData(response.id));
+            })
+        }
+        
+    },[])
     const  formSubmitSearch = event => {
-        console.log(searchField);  
-        //console.log(getProductsSearch(searchField)); RETURN PROMISE <PENDING> WE SHOULD WRITE .THEN
-
-        //appel à une fonction qui retourne un promesse sans utiliser async et await 
-        getProductsSearch(searchField).then(function(result) {
-            console.log(result) 
-         })
-        
-        // function with ASYNC and AWAIT
-        //getProductsSearch2(searchField);
-        
+        console.log(searchField);
+        if (searchField !== "")  {
+            navigate(`/product-list/search=${searchField}`)
+        }
   }
 
     const inputHandler = event => {
-        setSearchFields(event.target.value);
+        setSearchField(event.target.value);
     }
 
+    useEffect(()=>{
+        if (location === "/carts/"){
+            setVisibility(false);
+        }
+        else {setVisibility(true);}
+    }
+    ,[pathname])
+
     return (
-        <div>
+         <div>
             <div className="site-branding-area">
                 <div className="container">
                     <div className="row">
@@ -45,13 +56,17 @@ export const Header = () => {
                             </div>
                         </div>
                         <div className="col-sm-4">
-                            <input type="text" style={{ marginTop: 30 }} placeholder="Search products..." onChange={inputHandler} />
-                            <input type="button" onClick={formSubmitSearch}  defaultValue="Search" />
-                        </div>
+                        {visibility &&
+                                <>
+                                    <input type="text" style={{ marginTop: 30 }} placeholder="Search products..." onChange={inputHandler} />
+                                    <input type="button" onClick={formSubmitSearch}  defaultValue="Search" />
+                                </>
+                            }
+                        </div> 
                         <div className="col-sm-4">
                         {cartId &&
                             <div className="shopping-item">
-                            <Link to={ `/cart/${cartId}` }>
+                            <Link to={ `/carts/${cartId}` }>
                                     Cart :  <span className="cart-amunt">100.58 €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">5</span>
                                 </Link>
                             </div>}
