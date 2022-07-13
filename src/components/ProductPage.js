@@ -9,10 +9,9 @@ export const ProductPage = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-4">
-                        <ProductFP/>
                     </div>
                     <div className="col-md-8">
-                        {/* <ProductFP /> */}
+                    <ProductFP/>
                     </div>
                 </div>
             </div>

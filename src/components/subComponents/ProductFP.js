@@ -8,18 +8,23 @@ export const ProductFP = () => {
     let productItem ={}
     let result = [];
     const [ filteredProduct, setFilteredProduct] =  useState(false);
+    const crossedOutPrice=(price, discountRate)=>{
+        var priceCrossed= price + (discountRate * price)/100;
+        return priceCrossed;
+    }
     useEffect(()=>{
         getProductData(productId).then((response)=>{
             setProductData(response);
             result = items.filter(item => {
                 return item.id === response.id;
               });
-              console.log(result.length)
-            if (result.length === 0) {
+            if (result.length == 0) {
                 setFilteredProduct (true) ;
             }
+            else {
+                setFilteredProduct (false) ;
+            }
             if (filteredProduct){
-                console.log("in if");
                 productItem = {
                     discountRate: response.discountRate,
                     id: response.id,
@@ -36,7 +41,7 @@ export const ProductFP = () => {
         
         
         
-    },[]);
+    },[filteredProduct]);
     
     return(
         <div className="product-content-right">
@@ -49,30 +54,34 @@ export const ProductFP = () => {
                 <div className="col-sm-6">
                     <div className="product-images">
                         <div className="product-main-img">
-                            <img src="img/product-2.jpg" alt />
+                            <img src={`/assets/img/${productData.imageName}`} alt />
                         </div>
                         <div className="product-gallery">
-                            <img src="img/product-thumb-1.jpg" alt />
-                            <img src="img/product-thumb-2.jpg" alt />
-                            <img src="img/product-thumb-3.jpg" alt />
+                            <img src={`/assets/img/${productData.imageName}`} alt />
+                            <img src={`/assets/img/${productData.imageName}`} alt />
+                            <img src={`/assets/img/${productData.imageName}`} alt />
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-6">
                     <div className="product-inner">
-                        <h2 className="product-name">Sony Smart TV - 2015</h2>
+                        <h2 className="product-name">{productData.name}</h2>
                         <div className="product-inner-price">
-                            <ins>$700.00</ins> <del>$100.00</del>
+                            <ins>${productData.price}</ins> <del>${crossedOutPrice(productData.price,productData.discountRate)}</del>
                         </div>
                         <form action className="cart">
                             <div className="quantity">
-                                <input type="number" size={4} className="input-text qty text" title="Qty" defaultValue={1} name="quantity" min={1} step={1} />
+                                <input type="number" size={4} 
+                                className="input-text qty text" 
+                                title="Qty" 
+                                defaultValue={1} 
+                                name="quantity" min={1} step={1} />
                             </div>
                             <button className="add_to_cart_button" type="submit">Add to cart</button>
                         </form>
                         <div className="product-inner-category">
                             <h2>Product Description</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, diam in consequat iaculis, est purus iaculis mauris, imperdiet facilisis ante ligula at nulla. Quisque volutpat nulla risus, id maximus ex aliquet ut. Suspendisse potenti. Nulla varius lectus id turpis dignissim porta. Quisque magna arcu, blandit quis felis vehicula, feugiat gravida diam. Nullam nec turpis ligula. Aliquam quis blandit elit, ac sodales nisl. Aliquam eget dolor eget elit malesuada aliquet. In varius lorem lorem, semper bibendum lectus lobortis ac.</p>
+                            <p>{productData.description}</p>
                         </div>
                     </div>
                 </div>
