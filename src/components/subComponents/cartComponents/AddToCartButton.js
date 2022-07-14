@@ -1,19 +1,22 @@
 import {Link, useNavigate  } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { addProductToCart } from '../../../services/CartService';
+import { setCartData } from '../../../redux/reducers/cart/cartActions';
 
 export const AddToCartButton = (props) => {
     //lezem nzid l produit lel redux
     //ntesti kn mawjoud nzid fil quantité
     //sinon nzidou
     //
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const {cartId, name, price, image, id} = props;
     const cartData = useSelector(state => state.cart);
     let data = {};
     let result, result2;
     const addToCart = (e,id, name, image, price) => {
-        e.preventDefault()
+        e.preventDefault();
+        console.log("debut");
         data = {
             "id": id,
             "name": name,
@@ -29,6 +32,7 @@ export const AddToCartButton = (props) => {
         
         if (result.length == 0) {
             cartData.items.push(data);
+            console.log("if");
         }
         else {
             result2 = cartData.items.filter(item => {
@@ -37,14 +41,17 @@ export const AddToCartButton = (props) => {
             result[0].qty = result[0].qty + 1;
             result2.push(...result);
             cartData.items = result2;
+            console.log("else");
         }
         
         console.log(cartData);
         
         addProductToCart("carts/"+cartId, cartData).then((response) => {
-
+            console.log("then adddToCart");
         })
+        console.log("fin");
         navigate(`/carts/${cartId}`);
+        console.log("fin2");
     }
    
     return(
@@ -56,7 +63,8 @@ export const AddToCartButton = (props) => {
                         data-product_sku="" 
                         data-product_id="70" 
                         rel="nofollow" 
-                        href="" onClick={(e)=>{addToCart(e,id, name, image, price)}}>
+                        href="" 
+                        onClick={(e)=>{addToCart(e,id, name, image, price)}}>
                         Add to cart
                     </a>
           

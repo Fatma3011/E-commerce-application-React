@@ -36,7 +36,6 @@ export const Header = (props) => {
                     dispatch(setCartData(response.id));
             })
         }
-        
     },[dispatch])
     const  formSubmitSearch = event => {
         console.log(searchField);

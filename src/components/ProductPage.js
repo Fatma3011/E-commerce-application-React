@@ -1,8 +1,5 @@
-import {useState, useEffect} from 'react';
 import { OtherBrand } from './subComponents/OtherBrand';
-import { ProductCard } from './subComponents/ProductCard';
 import { ProductFP } from './subComponents/ProductFP';
-import { ProductItem } from './subComponents/ProductItem';
 import { RecentlyViewedForFP } from './subComponents/RecentlyViewedForFP';
 export const ProductPage = () => {
 

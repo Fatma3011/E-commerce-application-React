@@ -1,5 +1,5 @@
 import {Link  } from 'react-router-dom'
-import { ViewAllButton } from './ViewAllButton';
+import { ViewAllButton } from '../ViewAllButton';
 
 export const ProductItem = (props) => {
     const {products, title}=props    

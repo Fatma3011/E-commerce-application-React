@@ -25,7 +25,7 @@ const cartReducer = (state = initialState, action) => {
             cartId: action.data.id,
             total: action.data.total,
             subTotal: action.data.subTotal,
-            items: state.items.concat( action.data.items),
+            items:  action.data.items,
         }
     }
     return {
