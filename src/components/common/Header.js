@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import { setCartData } from '../../redux/reducers/cart/cartActions';
 import { getCartId } from '../../services/CartService';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const Header = (props) => {
     const {pathname} = useLocation();
@@ -13,17 +15,29 @@ export const Header = (props) => {
     const [searchField, setSearchField] = useState('');
     const navigate = useNavigate();
     const cartId =  localStorage.getItem('cartId');
+    const data = useSelector(state => state.cart);
+    
+    const idCart = uuidv4();
+    let newCart = {
+        "id" : idCart,
+        "total": 0,
+        "subTotal": 0,
+        "tax": 0,
+          "items":[]
+    };
     useEffect(()=>{
         const url = "carts";
+        dispatch(setCartData(cartId));
+        console.log(cartId)
         if (!cartId){
-            getCartId(url)
+            getCartId(url, newCart)
                 .then(response => {
                     localStorage.setItem('cartId', response.id);
                     dispatch(setCartData(response.id));
             })
         }
         
-    },[])
+    },[dispatch])
     const  formSubmitSearch = event => {
         console.log(searchField);
         if (searchField !== "")  {
@@ -34,6 +48,7 @@ export const Header = (props) => {
     const inputHandler = event => {
         setSearchField(event.target.value);
     }
+
 
     useEffect(()=>{
         if (location === "/carts/"){
@@ -67,7 +82,7 @@ export const Header = (props) => {
                         {cartId &&
                             <div className="shopping-item">
                             <Link to={ `/carts/${cartId}` }>
-                                    Cart :  <span className="cart-amunt">100.58 €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">5</span>
+                                    Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{data.items.length}</span>
                                 </Link>
                             </div>}
                         </div>

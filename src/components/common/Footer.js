@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 export const Footer = () => {
     const categories = useSelector(state => state.category.categories);
     return(

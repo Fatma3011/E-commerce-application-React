@@ -5,32 +5,27 @@ import {
 
 const initialState = {
     cartId: "",
-    total: "",
-    subTotal:"",
-    items: [{id: "",
-            name:"",
-            imageName:"",
-            price:"",
-            qty:""
-}],
+    total: 0,
+    subTotal: 0,
+    items: [],
 
 }
 
 const cartReducer = (state = initialState, action) => {
     if (action.type === SET_CART_ID) {
-            return {
-                cartId: action.id,
-                total: state.data.total,
-                subTotal: state.data.subTotal,
-                items: state.data.items
-            }
+        return {
+            cartId: action.id,
+            total: state.data.total,
+            subTotal: state.data.subTotal,
+            items: state.data.items
         }
-        if (action.type === SET_CART_DATA) {
-            return {
-                cartId: action.data.id,
-                total: action.data.total,
-                subTotal: action.data.subTotal,
-                items: [...state.items, action.data.item]
+    }
+    if (action.type === SET_CART_DATA) {
+        return {
+            cartId: action.data.id,
+            total: action.data.total,
+            subTotal: action.data.subTotal,
+            items: state.items.concat( action.data.items),
         }
     }
     return {
@@ -39,5 +34,5 @@ const cartReducer = (state = initialState, action) => {
         subTotal: state.subTotal,
         items: state.items
     }
-    }
+}
 export default cartReducer

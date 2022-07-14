@@ -1,8 +1,9 @@
 import React from 'react';
+import { CartLayout } from './subComponents/CartLayout';
 export const CartPage = () => {
     return(
         <>
-            <h1>Cart Page</h1>
+            <CartLayout/>
         </>
     );
 };
