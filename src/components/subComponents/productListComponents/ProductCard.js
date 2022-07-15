@@ -1,5 +1,5 @@
 import {Link  } from 'react-router-dom'
-import { AddToCartButton } from './cartComponents/AddToCartButton';
+import { AddToCartButton } from '../cartComponents/AddToCartButton';
 export const ProductCard = (props) => {
     const {id, image, name, price, review,discountRate,categoryName} =props;
     const crossedOutPrice=(price, discountRate)=>{

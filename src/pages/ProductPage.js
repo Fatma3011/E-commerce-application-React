@@ -1,6 +1,6 @@
-import { OtherBrand } from './subComponents/OtherBrand';
-import { ProductFP } from './subComponents/ProductFP';
-import { RecentlyViewedForFP } from './subComponents/RecentlyViewedForFP';
+import { OtherBrand } from '../components/subComponents/FPComponents/OtherBrand';
+import { ProductFP } from '../components/subComponents/FPComponents/ProductFP';
+import { RecentlyViewedForFP } from '../components/subComponents/FPComponents/RecentlyViewedForFP';
 export const ProductPage = () => {
 
     return(

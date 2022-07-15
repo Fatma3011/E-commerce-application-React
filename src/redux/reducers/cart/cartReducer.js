@@ -7,6 +7,7 @@ const initialState = {
     cartId: "",
     total: 0,
     subTotal: 0,
+    tax: 0,
     items: [],
 
 }
@@ -17,6 +18,7 @@ const cartReducer = (state = initialState, action) => {
             cartId: action.id,
             total: state.data.total,
             subTotal: state.data.subTotal,
+            tax: state.data.tax,
             items: state.data.items
         }
     }
@@ -25,6 +27,7 @@ const cartReducer = (state = initialState, action) => {
             cartId: action.data.id,
             total: action.data.total,
             subTotal: action.data.subTotal,
+            tax: action.data.tax,
             items:  action.data.items,
         }
     }
@@ -32,6 +35,7 @@ const cartReducer = (state = initialState, action) => {
         cartId: state.cartId,
         total: state.total,
         subTotal: state.subTotal,
+        tax: state.tax,
         items: state.items
     }
 }

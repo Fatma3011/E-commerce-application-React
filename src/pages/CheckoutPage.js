@@ -1,10 +1,7 @@
 import React from 'react';
-import { Footer } from './common/Footer';
-import { Header } from './common/Header';
-import { Navigation } from './common/Navigation';
-import { CustomerDetails } from './subComponents/CustomerDetails';
-import { OrderReview } from './subComponents/OrderReview';
-import { Title } from './subComponents/Title';
+import { CustomerDetails } from '../components/subComponents/checkoutComponents/CustomerDetails';
+import { OrderReview } from '../components/subComponents/checkoutComponents/OrderReview';
+import { Title } from '../components/common/Title';
 
 export const CheckoutPage = () => {
     return(

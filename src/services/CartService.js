@@ -18,6 +18,7 @@ export const getCartId = (url, data) => {
             ApiCaller.get(API_BASE_URL + url)
             .then((response) => {
               resolve(response.data);
+              console.error('resolve')
             })
             .catch((error) => {
                 console.error('ERROR')

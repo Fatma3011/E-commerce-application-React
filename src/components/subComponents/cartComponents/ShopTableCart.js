@@ -1,8 +1,46 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import { addProductToCart } from '../../../services/CartService';
+
 export const ShopTableCart = () => {
     const cartData = useSelector(state => state.cart);
-    console.log(cartData.items);
+    const navigate = useNavigate();
+
+    let sameItem = [];
+    let ancientItems = [];
+    let data;
+    const deleteFromCart = (e, id, name, image, price) => {
+        e.preventDefault();
+        data = {
+            "id": id,
+            "name": name,
+            "imageName": image,
+            "price": price,
+            "qty": 1
+        }
+        sameItem = cartData.items.filter(item => {
+            return item.id === id;
+        });
+        cartData.subTotal = cartData.subTotal - price;
+        cartData.total = cartData.subTotal - (cartData.subTotal * cartData.tax) / 100;
+        sameItem[0].qty = sameItem[0].qty - 1;
+        ancientItems = cartData.items.filter(item => {
+            return item.id !== data.id;
+        });
+        if (sameItem[0].qty == 0) {
+            
+            cartData.items = ancientItems;
+
+        }
+        else{
+            ancientItems.push(...sameItem);
+            cartData.items = ancientItems;
+        }
+
+        addProductToCart("carts/" + cartData.cartId, cartData).then((response) => {
+        })
+        navigate(`/carts/${cartData.cartId}`);
+    }
     return(
         <table cellSpacing={0} className="shop_table cart">
             <thead>
@@ -19,7 +57,11 @@ export const ShopTableCart = () => {
                 {cartData.items && cartData.items.map((item, index) => (
                     <tr className="cart_item" key={index}>
                         <td className="product-remove">
-                            <a title="Remove this item" className="remove" href="#">×</a>
+                            <a title="Remove this item" 
+                                className="remove" 
+                                href="#"
+                                onClick={(e)=>{ deleteFromCart(e,item.id, item.name, item.imageName, item.price)}}
+                            >×</a>
                         </td>
                         <td className="product-thumbnail">
                             <a href="single-product.html">
@@ -27,7 +69,7 @@ export const ShopTableCart = () => {
                             </a>
                         </td>
                         <td className="product-name">
-                            <a href="single-product.html">Ship Your Idea</a>
+                            <a href="single-product.html">{item.name}</a>
                         </td>
                         <td className="product-price">
                             <span className="amount">{item.price}€</span>

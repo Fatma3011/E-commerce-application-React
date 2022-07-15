@@ -1,7 +1,7 @@
 import React from 'react';
-import { CartTotals } from './cartComponents/CartTotals';
-import { CrossSells } from './cartComponents/CrossSells';
-import { ShopTableCart } from './cartComponents/ShopTableCart';
+import { CartTotals } from './CartTotals';
+import { CrossSells } from './CrossSells';
+import { ShopTableCart } from './ShopTableCart';
 export const CartLayout = () => {
     return(
         <div className="single-product-area">

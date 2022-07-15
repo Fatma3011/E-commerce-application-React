@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductByCategory } from '../../services/CategoryService';
-import { getProductsSearch } from '../../services/ProductService';
+import { getProductByCategory } from '../../../services/CategoryService';
+import { getProductsSearch } from '../../../services/ProductService';
 import { ProductCard } from './ProductCard';
-import { Title } from './Title';
+import { Title } from '../../common/Title';
 export const ProductList = () => {
 
   const { categoryId } = useParams();
   const [products, setProducts] = useState([]);
   const [title, setTitle] = useState("");
   useEffect(() => {
+    console.log("product List use Effect")
     if ( categoryId.includes("search")){
       const searchWord = categoryId.substr(7);
       getProductsSearch(searchWord).then(function(result) {

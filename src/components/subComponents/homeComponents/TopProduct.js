@@ -1,12 +1,10 @@
 import React, { useEffect,useState } from 'react';
 import { getTopProducts } from '../../../services/ProductService';
-import { ProductItem } from './ProductItem';
+import { ProductElement } from './ProductElement';
 export const TopProduct = (props) => {
     const [topSellers, setTopSellers] = useState([]);
     const [topNew, setTopNew] = useState([]);
     const [recentlyViewedProducts , setRecentlyViewedProducts] = useState([]);
-    console.log(recentlyViewedProducts);
-
 
     useEffect(()=>{
         getTopProducts('top-sellers-products').then((response) => {
@@ -16,7 +14,7 @@ export const TopProduct = (props) => {
             setTopNew(response);
          });
         setRecentlyViewedProducts (JSON.parse(localStorage.getItem('recentlyViewed')));
-        console.log(recentlyViewedProducts);
+        console.log("TopProductComponents useEffect");
         
     }, [])
     return (
@@ -25,11 +23,11 @@ export const TopProduct = (props) => {
             <div className="container">
                 <div className="row">
                     
-                            <ProductItem title ="Top Sellers" products={topSellers} />
+                            <ProductElement title ="Top Sellers" products={topSellers} />
                     
-                            <ProductItem title ="Recently Viewed" products = {recentlyViewedProducts} />
+                            <ProductElement title ="Recently Viewed" products = {recentlyViewedProducts} />
                        
-                            <ProductItem title ="Top New" products={topNew} />
+                            <ProductElement title ="Top New" products={topNew} />
                         
                     
                 </div>

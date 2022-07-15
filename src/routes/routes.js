@@ -1,12 +1,12 @@
 import {useEffect} from 'react';
 import { Route, Routes,BrowserRouter } from "react-router-dom";
 import {useDispatch} from 'react-redux';
-import { CartPage } from '../components/CartPage';
-import { CheckoutPage } from '../components/CheckoutPage';
-import { HomePage } from '../components/HomePage';
-import { PageLayout } from '../components/PageLayout';
-import { ProductListPage } from '../components/ProductListPage';
-import { ProductPage } from '../components/ProductPage';
+import { CartPage } from '../pages/CartPage';
+import { CheckoutPage } from '../pages/CheckoutPage';
+import { HomePage } from '../pages/HomePage';
+import { PageLayout } from '../pages/PageLayout';
+import { ProductListPage } from '../pages/ProductListPage';
+import { ProductPage } from '../pages/ProductPage';
 
 import { setCategories } from '../redux/reducers/category/categoryActions';
 export const Routess = () => {
