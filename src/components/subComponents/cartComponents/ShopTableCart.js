@@ -1,7 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import { addProductToCart } from '../../../services/CartService';
-
+// il reste le input
 export const ShopTableCart = () => {
     const cartData = useSelector(state => state.cart);
     const navigate = useNavigate();
@@ -33,6 +33,38 @@ export const ShopTableCart = () => {
 
         }
         else{
+            
+            cartData.items = ancientItems;
+        }
+
+        addProductToCart("carts/" + cartData.cartId, cartData).then((response) => {
+        })
+        navigate(`/carts/${cartData.cartId}`);
+    }
+    const minus = (e, id, name, image, price) => {
+        e.preventDefault();
+        data = {
+            "id": id,
+            "name": name,
+            "imageName": image,
+            "price": price,
+            "qty": 1
+        }
+        sameItem = cartData.items.filter(item => {
+            return item.id === id;
+        });
+        cartData.subTotal = cartData.subTotal - price;
+        cartData.total = cartData.subTotal - (cartData.subTotal * cartData.tax) / 100;
+        sameItem[0].qty = sameItem[0].qty - 1;
+        ancientItems = cartData.items.filter(item => {
+            return item.id !== data.id;
+        });
+        if (sameItem[0].qty == 0) {
+            
+            cartData.items = ancientItems;
+
+        }
+        else{
             ancientItems.push(...sameItem);
             cartData.items = ancientItems;
         }
@@ -41,6 +73,38 @@ export const ShopTableCart = () => {
         })
         navigate(`/carts/${cartData.cartId}`);
     }
+    const plus = (e, id, name, image, price) => {
+        e.preventDefault();
+        data = {
+            "id": id,
+            "name": name,
+            "imageName": image,
+            "price": price,
+            "qty": 1
+        }
+        sameItem = cartData.items.filter(item => {
+            return item.id === id;
+          });
+        cartData.subTotal = cartData.subTotal+ price;
+        cartData.total = cartData.subTotal + ( cartData.subTotal * cartData.tax)/100;
+        if (sameItem.length == 0) {
+            cartData.items.push(data);
+        }
+        else {
+            ancientItems = cartData.items.filter(item => {
+                return item.id !== data.id;
+              });
+            sameItem[0].qty = sameItem[0].qty + 1;
+            ancientItems.push(...sameItem);
+            cartData.items = ancientItems;
+        }
+        
+        
+        addProductToCart("carts/"+ cartData.cartId, cartData).then((response) => {
+        })
+        navigate(`/carts/${cartData.cartId}`);
+    }
+   
     return(
         <table cellSpacing={0} className="shop_table cart">
             <thead>
@@ -60,12 +124,15 @@ export const ShopTableCart = () => {
                             <a title="Remove this item" 
                                 className="remove" 
                                 href="#"
-                                onClick={(e)=>{ deleteFromCart(e,item.id, item.name, item.imageName, item.price)}}
+                                onClick={(e)=>{ deleteFromCart(e,item.id,  item.name, item.imageName, item.price)}}
                             >×</a>
                         </td>
                         <td className="product-thumbnail">
                             <a href="single-product.html">
-                                <img width={145} height={145} alt="PIC" className="shop_thumbnail" src={`/assets/img/${item.imageName}`} />
+                                <img width={145} height={145} alt="PIC" 
+                                    className="shop_thumbnail" 
+                                    src={`/assets/img/${item.imageName}`} 
+                                />
                             </a>
                         </td>
                         <td className="product-name">
@@ -76,9 +143,21 @@ export const ShopTableCart = () => {
                         </td>
                         <td className="product-quantity">
                             <div className="quantity buttons_added">
-                                <input type="button" className="minus" defaultValue="-" />
-                                <input type="number" size={4} className="input-text qty text" title="Qty" defaultValue={item.qty} min={0} step={1} />
-                                <input type="button" className="plus" defaultValue="+" />
+                                <input type="button" 
+                                    className="minus" 
+                                    defaultValue="-" 
+                                    onClick={(e)=>{minus(e,item.id, item.name, item.imageName, item.price)}}
+                                    />
+                                <input type="number" size={4} className="input-text qty text" 
+                                    title="Qty" 
+                                    defaultValue={item.qty} 
+                                    value={item.qty} 
+                                    min={0} step={1} />
+                                <input type="button" 
+                                    className="plus" 
+                                    defaultValue="+" 
+                                    onClick={(e)=>{plus(e,item.id, item.name, item.imageName, item.price)}}
+                                    />
                             </div>
                         </td>
                         <td className="product-subtotal">

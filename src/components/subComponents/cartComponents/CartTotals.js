@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useSelector} from 'react-redux';
 
 export const CartTotals = () => {
     const cartData = useSelector(state => state.cart);
+    useEffect(()=>{},[cartData])
     return(
         <div className="cart_totals ">
             <h2>Cart Totals</h2>

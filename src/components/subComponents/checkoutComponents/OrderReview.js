@@ -1,5 +1,11 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+
 export const OrderReview = () => {
+    const cartData = useSelector(state => state.cart);
+    const orderPlace = (e, cart) => {
+        //supprimer le panier
+    }
     return(
         <div>
             <h3 id="order_review_heading">Your order</h3>
@@ -12,28 +18,30 @@ export const OrderReview = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="cart_item">
-                            <td className="product-name">
-                                Ship Your Idea <strong className="product-quantity">× 1</strong> </td>
-                            <td className="product-total">
-                                <span className="amount">£15.00</span> </td>
-                        </tr>
+                        {cartData.items.map((item, index)=>(
+                            <tr className="cart_item">
+                                <td className="product-name">
+                                    {item.name} <strong className="product-quantity">× {item.qty}</strong> </td>
+                                <td className="product-total">
+                                    <span className="amount">£{item.price * item.qty}</span> </td>
+                            </tr>
+                        ))}
                     </tbody>
                     <tfoot>
                         <tr className="cart-subtotal">
                             <th>Cart Subtotal</th>
-                            <td><span className="amount">£15.00</span>
+                            <td><span className="amount">£{cartData.subTotal}</span>
                             </td>
                         </tr>
                         <tr className="shipping">
                             <th>Taxe (20%)</th>
                             <td>
-                                12.12 €
+                                {cartData.tax} €
                             </td>
                         </tr>
                         <tr className="order-total">
                             <th>Order Total</th>
-                            <td><strong><span className="amount">15.00 € </span></strong> </td>
+                            <td><strong><span className="amount">{cartData.total} € </span></strong> </td>
                         </tr>
                     </tfoot>
                 </table>
@@ -63,7 +71,14 @@ export const OrderReview = () => {
                         </li>
                     </ul>
                     <div className="form-row place-order">
-                        <input type="button" data-value="Place order" defaultValue="Place order" id="place_order" name="woocommerce_checkout_place_order" className="button alt" />
+                        <input type="button" 
+                            data-value="Place order" 
+                            defaultValue="Place order" 
+                            id="place_order" 
+                            name="woocommerce_checkout_place_order" 
+                            className="button alt" 
+                            onClick={(e)=>{orderPlace(e,cartData)}}
+                            />
                     </div>
                     <div className="clear" />
                 </div>
