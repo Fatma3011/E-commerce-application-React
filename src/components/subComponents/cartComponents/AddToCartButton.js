@@ -1,29 +1,29 @@
 import {Link, useNavigate  } from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import { addProductToCart } from '../../../services/CartService';
-import { setCartData } from '../../../redux/reducers/cart/cartActions';
 
 export const AddToCartButton = (props) => {
     
     
     const navigate = useNavigate();
-    const {cartId, name, price, image, id} = props;
+    const {cartId, name, price, image, id, nbToAdd} = props;
     const cartData = useSelector(state => state.cart);
     let data = {};
     let sameItem, ancientItems;
-    const addToCart = (e,id, name, image, price) => {
+
+    const addToCart = (e,id, name, image, price,nbToAdd) => {
         e.preventDefault();
         data = {
             "id": id,
             "name": name,
             "imageName": image,
             "price": price,
-            "qty": 1
+            "qty": nbToAdd
         }
         sameItem = cartData.items.filter(item => {
             return item.id === id;
           });
-        cartData.subTotal = cartData.subTotal+ price;
+        cartData.subTotal = cartData.subTotal+ price * nbToAdd;
         cartData.total = cartData.subTotal + ( cartData.subTotal * cartData.tax)/100;
         if (sameItem.length == 0) {
             cartData.items.push(data);
@@ -32,7 +32,7 @@ export const AddToCartButton = (props) => {
             ancientItems = cartData.items.filter(item => {
                 return item.id !== data.id;
               });
-            sameItem[0].qty = sameItem[0].qty + 1;
+            sameItem[0].qty = sameItem[0].qty + nbToAdd;
             ancientItems.push(...sameItem);
             cartData.items = ancientItems;
         }
@@ -53,7 +53,7 @@ export const AddToCartButton = (props) => {
                         data-product_id="70" 
                         rel="nofollow" 
                         href="" 
-                        onClick={(e)=>{addToCart(e,id, name, image, price)}}>
+                        onClick={(e)=>{addToCart(e,id, name, image, price, nbToAdd)}}>
                         Add to cart
                     </a>
           

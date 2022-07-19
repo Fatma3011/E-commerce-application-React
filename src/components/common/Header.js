@@ -4,8 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import { setCartData } from '../../redux/reducers/cart/cartActions';
 import { getCartId } from '../../services/CartService';
-import { v4 as uuidv4 } from 'uuid';
-
 
 export const Header = (props) => {
     const {pathname} = useLocation();
@@ -17,9 +15,8 @@ export const Header = (props) => {
     const cartId =  localStorage.getItem('cartId');
     const data = useSelector(state => state.cart);
     
-    const idCart = uuidv4();
     let newCart = {
-        "id" : idCart,
+        
         "total": 0,
         "subTotal": 0,
         "tax": 0,

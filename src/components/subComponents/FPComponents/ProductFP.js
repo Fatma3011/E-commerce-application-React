@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductData } from '../../../services/ProductService';
+import { AddToCartButton } from '../cartComponents/AddToCartButton'
 export const ProductFP = () => {
     const {productId} = useParams();
+    const [nbToAdd, setnbToAdd] = useState(1);
     const [ productData, setProductData] = useState([]);
+    const cartId = localStorage.getItem("cartId");
     const items = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
     let productItem ={}
     let result = [];
@@ -42,7 +45,9 @@ export const ProductFP = () => {
         
         
     },[filteredProduct]);
-    
+    const inputHandler = event => {
+        setnbToAdd(event.target.value);
+    }
     return(
         <div className="product-content-right">
             <div className="product-breadcroumb">
@@ -74,10 +79,13 @@ export const ProductFP = () => {
                                 <input type="number" size={4} 
                                 className="input-text qty text" 
                                 title="Qty" 
-                                defaultValue={1} 
-                                name="quantity" min={1} step={1} />
+                                defaultValue={nbToAdd} 
+                                value={nbToAdd}
+                                name="quantity" min={1} step={1}
+                                onChange={inputHandler} />
                             </div>
-                            <button className="add_to_cart_button" type="submit">Add to cart</button>
+                            <AddToCartButton cartId={cartId} name = {productData.name} price = {productData.price} image = {productData.imageName} id = {productId} nbToAdd={nbToAdd}/>
+                            
                         </form>
                         <div className="product-inner-category">
                             <h2>Product Description</h2>

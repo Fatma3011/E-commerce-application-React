@@ -21,21 +21,12 @@ export const ShopTableCart = () => {
         sameItem = cartData.items.filter(item => {
             return item.id === id;
         });
-        cartData.subTotal = cartData.subTotal - price;
+        cartData.subTotal = cartData.subTotal - price * sameItem[0].qty;
         cartData.total = cartData.subTotal - (cartData.subTotal * cartData.tax) / 100;
-        sameItem[0].qty = sameItem[0].qty - 1;
         ancientItems = cartData.items.filter(item => {
             return item.id !== data.id;
         });
-        if (sameItem[0].qty == 0) {
-            
-            cartData.items = ancientItems;
-
-        }
-        else{
-            
-            cartData.items = ancientItems;
-        }
+        cartData.items = ancientItems;
 
         addProductToCart("carts/" + cartData.cartId, cartData).then((response) => {
         })
@@ -106,7 +97,9 @@ export const ShopTableCart = () => {
     }
    
     return(
-        <table cellSpacing={0} className="shop_table cart">
+        <>
+        
+        {cartData.items.length === 0 ? <h1>Your Cart is empty</h1> : <table cellSpacing={0} className="shop_table cart">
             <thead>
                 <tr>
                     <th className="product-remove">&nbsp;</th>
@@ -166,7 +159,7 @@ export const ShopTableCart = () => {
                     </tr>
                 ))}
                 <tr>
-                    <td className="actions" colSpan={6}>
+                <td className="actions" colSpan={6}>
                         <Link to="/checkout">
                             <input type="button"
                                 defaultValue="Checkout"
@@ -177,7 +170,7 @@ export const ShopTableCart = () => {
                     </td>
                 </tr>
             </tbody>
-        </table>
-
+        </table>}
+        </>
         );
 };

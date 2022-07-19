@@ -21,7 +21,7 @@ export const ProductCard = (props) => {
                     <ins>{price}</ins> <del>${crossedOutPrice(price, discountRate)}</del>
                 </div>
                 <div className="product-option-shop">
-                    <AddToCartButton cartId={cartId} name = {name} price = {price} image = {image} id = {id} />
+                    <AddToCartButton cartId={cartId} name = {name} price = {price} image = {image} id = {id} nbToAdd={1} />
                 </div>
             </div>
         </div>
