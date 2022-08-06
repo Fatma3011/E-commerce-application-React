@@ -7,7 +7,7 @@ import { getCartId } from '../../services/CartService';
 
 export const Header = (props) => {
     const {pathname} = useLocation();
-    const location = pathname.substr(0,7); 
+    const location = pathname.substr(0,6); 
     const [visibility, setVisibility] = useState(true);
     const dispatch = useDispatch();
     const [searchField, setSearchField] = useState('');
@@ -16,16 +16,15 @@ export const Header = (props) => {
     const data = useSelector(state => state.cart);
     
     let newCart = {
-        
         "total": 0,
         "subTotal": 0,
         "tax": 0,
-          "items":[]
+        "items": []
     };
+    let searchWord = "";
     useEffect(()=>{
         const url = "carts";
-        dispatch(setCartData(cartId));
-        console.log(cartId)
+        
         if (!cartId){
             getCartId(url, newCart)
                 .then(response => {
@@ -33,11 +32,15 @@ export const Header = (props) => {
                     dispatch(setCartData(response.id));
             })
         }
-    },[dispatch])
+        else{
+            dispatch(setCartData(cartId));
+        }
+    },[searchField, dispatch])
     const  formSubmitSearch = event => {
-        console.log(searchField);
+            searchWord = searchField;
+            setSearchField("");
         if (searchField !== "")  {
-            navigate(`/product-list/search=${searchField}`)
+            navigate(`/product-list/search=${searchWord}`)
         }
   }
 
@@ -47,7 +50,7 @@ export const Header = (props) => {
 
 
     useEffect(()=>{
-        if (location === "/carts/"){
+        if (location === "/carts"){
             setVisibility(false);
         }
         else {setVisibility(true);}
@@ -75,10 +78,10 @@ export const Header = (props) => {
                             }
                         </div> 
                         <div className="col-sm-4">
-                        {cartId &&
+                        {cartId && 
                             <div className="shopping-item">
-                            <Link to={ `/carts/${cartId}` }>
-                                    Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{data.items.length}</span>
+                            <Link to={ `/carts` }>
+                                    Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{data.totalQuantities}</span>
                                 </Link>
                             </div>}
                         </div>

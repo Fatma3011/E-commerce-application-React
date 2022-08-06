@@ -23,6 +23,7 @@ export const AddToCartButton = (props) => {
         sameItem = cartData.items.filter(item => {
             return item.id === id;
           });
+        cartData.totalQuantities = cartData.totalQuantities + nbToAdd;
         cartData.subTotal = cartData.subTotal+ price * nbToAdd;
         cartData.total = cartData.subTotal + ( cartData.subTotal * cartData.tax)/100;
         if (sameItem.length == 0) {
@@ -40,7 +41,6 @@ export const AddToCartButton = (props) => {
         
         addProductToCart("carts/"+cartId, cartData).then((response) => {
         })
-        navigate(`/carts/${cartId}`);
     }
    
     return(
@@ -53,7 +53,7 @@ export const AddToCartButton = (props) => {
                         data-product_id="70" 
                         rel="nofollow" 
                         href="" 
-                        onClick={(e)=>{addToCart(e,id, name, image, price, nbToAdd)}}>
+                        onClick={(e)=>{addToCart(e,id, name, image, price, Number(nbToAdd))}}>
                         Add to cart
                     </a>
           

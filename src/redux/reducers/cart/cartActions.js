@@ -33,7 +33,6 @@ export function setCartData(id) {
     return function (dispatch) {
         getCartData(url +id)
             .then(response => {  
-                console.log(" CART API response ", response.items)
                 dispatch({
                     type: SET_CART_DATA, data: response
                 });

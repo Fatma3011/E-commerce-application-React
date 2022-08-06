@@ -20,7 +20,7 @@ export const Routess = () => {
             <PageLayout>
                 <Routes>
                         <Route path="/home" exact element={<HomePage/> } />
-                        <Route path="/carts/:cartId" element={<CartPage/> } />
+                        <Route path="/carts" element={<CartPage/> } />
                         <Route path="/checkout" exact element={<CheckoutPage/> } />
                         <Route path="/product/:productId" element={<ProductPage/> } />
                         <Route path="/product-list/:categoryId" element={<ProductListPage/> } />

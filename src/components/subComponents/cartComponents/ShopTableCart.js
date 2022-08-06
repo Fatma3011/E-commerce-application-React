@@ -21,6 +21,7 @@ export const ShopTableCart = () => {
         sameItem = cartData.items.filter(item => {
             return item.id === id;
         });
+        cartData.totalQuantities = cartData.totalQuantities - sameItem[0].qty; 
         cartData.subTotal = cartData.subTotal - price * sameItem[0].qty;
         cartData.total = cartData.subTotal - (cartData.subTotal * cartData.tax) / 100;
         ancientItems = cartData.items.filter(item => {
@@ -28,9 +29,9 @@ export const ShopTableCart = () => {
         });
         cartData.items = ancientItems;
 
-        addProductToCart("carts/" + cartData.cartId, cartData).then((response) => {
+        addProductToCart("carts/" + cartData.id, cartData).then((response) => {
         })
-        navigate(`/carts/${cartData.cartId}`);
+        navigate(`/carts`);
     }
     const minus = (e, id, name, image, price) => {
         e.preventDefault();
@@ -44,6 +45,7 @@ export const ShopTableCart = () => {
         sameItem = cartData.items.filter(item => {
             return item.id === id;
         });
+        cartData.totalQuantities = cartData.totalQuantities - 1; 
         cartData.subTotal = cartData.subTotal - price;
         cartData.total = cartData.subTotal - (cartData.subTotal * cartData.tax) / 100;
         sameItem[0].qty = sameItem[0].qty - 1;
@@ -60,9 +62,9 @@ export const ShopTableCart = () => {
             cartData.items = ancientItems;
         }
 
-        addProductToCart("carts/" + cartData.cartId, cartData).then((response) => {
+        addProductToCart("carts/" + cartData.id, cartData).then((response) => {
         })
-        navigate(`/carts/${cartData.cartId}`);
+        navigate(`/carts`);
     }
     const plus = (e, id, name, image, price) => {
         e.preventDefault();
@@ -76,6 +78,7 @@ export const ShopTableCart = () => {
         sameItem = cartData.items.filter(item => {
             return item.id === id;
           });
+        cartData.totalQuantities = cartData.totalQuantities + 1; 
         cartData.subTotal = cartData.subTotal+ price;
         cartData.total = cartData.subTotal + ( cartData.subTotal * cartData.tax)/100;
         if (sameItem.length == 0) {
@@ -91,9 +94,9 @@ export const ShopTableCart = () => {
         }
         
         
-        addProductToCart("carts/"+ cartData.cartId, cartData).then((response) => {
+        addProductToCart("carts/"+ cartData.id, cartData).then((response) => {
         })
-        navigate(`/carts/${cartData.cartId}`);
+        navigate(`/carts`);
     }
    
     return(
@@ -129,7 +132,7 @@ export const ShopTableCart = () => {
                             </a>
                         </td>
                         <td className="product-name">
-                            <a href="single-product.html">{item.name}</a>
+                        <Link to="/home">{item.name}</Link>
                         </td>
                         <td className="product-price">
                             <span className="amount">{item.price}€</span>

@@ -38,12 +38,8 @@ export const ProductFP = () => {
                  }
                 items.push(productItem);
                 localStorage.setItem('recentlyViewed', JSON.stringify(items));
-            }
-           
+            }      
         })
-        
-        
-        
     },[filteredProduct]);
     const inputHandler = event => {
         setnbToAdd(event.target.value);

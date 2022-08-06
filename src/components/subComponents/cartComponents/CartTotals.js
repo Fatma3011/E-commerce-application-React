@@ -6,7 +6,7 @@ export const CartTotals = () => {
     const navigate = useNavigate();
     const cartData = useSelector(state => state.cart);
     useEffect(()=>{
-        navigate(`/carts/${cartData.cartId}`);
+        navigate(`/carts`);
     },[cartData])
     return(
         cartData.items.length !== 0 ?

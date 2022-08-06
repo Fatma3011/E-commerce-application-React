@@ -10,7 +10,6 @@ export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [title, setTitle] = useState("");
   useEffect(() => {
-    console.log("product List use Effect")
     if ( categoryId.includes("search")){
       const searchWord = categoryId.substr(7);
       getProductsSearch(searchWord).then(function(result) {

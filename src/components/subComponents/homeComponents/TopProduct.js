@@ -14,7 +14,6 @@ export const TopProduct = (props) => {
             setTopNew(response);
          });
         setRecentlyViewedProducts (JSON.parse(localStorage.getItem('recentlyViewed')));
-        console.log("TopProductComponents useEffect");
         
     }, [])
     return (

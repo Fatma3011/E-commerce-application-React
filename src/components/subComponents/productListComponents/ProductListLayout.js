@@ -10,7 +10,7 @@ export const ProductListLayout = () => {
   const [productByCategory, setProductByCategory] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   
-  console.log(productByCategory)
+
   useEffect(()=>{
     getProductByCategory(categoryId).then((res)=>{setProductByCategory(res.items);setCategoryName(res.name)})
     

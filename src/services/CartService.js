@@ -36,3 +36,15 @@ export const getCartId = (url, data) => {
             });
     });
   };
+  export const sendOrder = (url, data) => {
+    return new Promise((resolve, reject) => {
+            ApiCaller.post(API_BASE_URL + url, data)
+            .then((response) => {
+              
+              resolve(response.data);
+            })
+            .catch((error) => {
+                console.error('ERROR')
+            });
+    });
+  };

@@ -5,10 +5,10 @@ import { useLocation } from 'react-router-dom';
 
 export const Navigation = (props) => {
     const {pathname} = useLocation();
-    const location = pathname.substr(0,7); 
+    const location = pathname.substr(0,6); 
     const [visibility, setVisibility] = useState(true);
     useEffect(()=>{
-        if (location === "/carts/"){
+        if (location === "/carts"){
             setVisibility(false);
         }
         else {setVisibility(true);}
