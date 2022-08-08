@@ -30,7 +30,7 @@ const cartReducer = (state = initialState, action) => {
             total: action.data.total,
             subTotal: action.data.subTotal,
             tax: action.data.tax,
-            totalQuantities: state.totalQuantities,
+            totalQuantities: action.data.totalQuantities,
             items:  action.data.items,
         }
     }

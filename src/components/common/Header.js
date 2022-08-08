@@ -14,13 +14,15 @@ export const Header = (props) => {
     const navigate = useNavigate();
     const cartId =  localStorage.getItem('cartId');
     const data = useSelector(state => state.cart);
-    
+    const totalQuantities = useSelector(state => state.cart.totalQuantities)
     let newCart = {
         "total": 0,
         "subTotal": 0,
         "tax": 0,
+        "totalQuantities":0,
         "items": []
     };
+
     let searchWord = "";
     useEffect(()=>{
         const url = "carts";
@@ -36,6 +38,7 @@ export const Header = (props) => {
             dispatch(setCartData(cartId));
         }
     },[searchField, dispatch])
+
     const  formSubmitSearch = event => {
             searchWord = searchField;
             setSearchField("");
@@ -47,7 +50,6 @@ export const Header = (props) => {
     const inputHandler = event => {
         setSearchField(event.target.value);
     }
-
 
     useEffect(()=>{
         if (location === "/carts"){
@@ -81,7 +83,7 @@ export const Header = (props) => {
                         {cartId && 
                             <div className="shopping-item">
                             <Link to={ `/carts` }>
-                                    Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{data.totalQuantities}</span>
+                                    Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{totalQuantities}</span>
                                 </Link>
                             </div>}
                         </div>

@@ -37,10 +37,7 @@ export const AddToCartButton = (props) => {
             ancientItems.push(...sameItem);
             cartData.items = ancientItems;
         }
-        
-        
-        addProductToCart("carts/"+cartId, cartData).then((response) => {
-        })
+        addProductToCart("carts/"+cartId, cartData).then((response) => {})
     }
    
     return(
