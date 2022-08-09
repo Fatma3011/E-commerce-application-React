@@ -7,7 +7,6 @@ import { getCartId } from '../../services/CartService';
 
 export const Header = (props) => {
     const {pathname} = useLocation();
-    const location = pathname.substr(0,6); 
     const [visibility, setVisibility] = useState(true);
     const dispatch = useDispatch();
     const [searchField, setSearchField] = useState('');
@@ -22,11 +21,9 @@ export const Header = (props) => {
         "totalQuantities":0,
         "items": []
     };
-
     let searchWord = "";
     useEffect(()=>{
         const url = "carts";
-        
         if (!cartId){
             getCartId(url, newCart)
                 .then(response => {
@@ -37,7 +34,8 @@ export const Header = (props) => {
         else{
             dispatch(setCartData(cartId));
         }
-    },[searchField, dispatch])
+
+    },[cartId])
 
     const  formSubmitSearch = event => {
             searchWord = searchField;
@@ -52,7 +50,7 @@ export const Header = (props) => {
     }
 
     useEffect(()=>{
-        if (location === "/carts"){
+        if (pathname === "/carts"){
             setVisibility(false);
         }
         else {setVisibility(true);}
@@ -80,7 +78,7 @@ export const Header = (props) => {
                             }
                         </div> 
                         <div className="col-sm-4">
-                        {cartId && 
+                        {cartId && totalQuantities !== 0 &&
                             <div className="shopping-item">
                             <Link to={ `/carts` }>
                                     Cart :  <span className="cart-amunt">{data.total} €</span> <i className="fa fa-shopping-cart" /> <span className="product-count">{totalQuantities}</span>

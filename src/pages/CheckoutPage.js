@@ -1,5 +1,4 @@
 import React from 'react';
-import swal from 'sweetalert';
 import { useNavigate} from 'react-router-dom'
 import { Title } from '../components/common/Title';
 import {useSelector} from 'react-redux';
@@ -9,6 +8,7 @@ import { sendOrder } from '../services/CartService';
 
 export const CheckoutPage = () => {
     const cartData = useSelector(state => state.cart);
+    const navigate = useNavigate();
     const orderPlace = (e, cart) => {
         //supprimer le panier
         
@@ -108,11 +108,11 @@ export const CheckoutPage = () => {
             // shipping_address_2: values.shipping_address_2,
             // order_comments: values.order_comments,
         };
-        sendOrder("orders", JSON.stringify(registred)).then((response)=>{console.log("success");})
+        sendOrder("orders", registred).then((response)=>{console.log("success");})
      
         localStorage.removeItem('cartId');
-        window.location.href = "http://localhost:3001/home";
-        //navigate("/home",{ replace: true })
+
+        navigate("/home",{ replace: true })
     }
       const formik = useFormik({ initialValues, onSubmit, validationSchema });
 

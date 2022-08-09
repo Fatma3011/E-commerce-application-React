@@ -10,7 +10,7 @@ export const ProductFP = () => {
     const items = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
     let productItem ={}
     let result = [];
-    const [ filteredProduct, setFilteredProduct] =  useState(false);
+    let filteredProduct =  false;
     const crossedOutPrice=(price, discountRate)=>{
         var priceCrossed= price + (discountRate * price)/100;
         return priceCrossed;
@@ -22,10 +22,10 @@ export const ProductFP = () => {
                 return item.id === response.id;
               });
             if (result.length == 0) {
-                setFilteredProduct (true) ;
+                filteredProduct = true ;
             }
             else {
-                setFilteredProduct (false) ;
+                filteredProduct = false ;
             }
             if (filteredProduct){
                 productItem = {
@@ -40,7 +40,7 @@ export const ProductFP = () => {
                 localStorage.setItem('recentlyViewed', JSON.stringify(items));
             }      
         })
-    },[filteredProduct]);
+    },[]);
     const inputHandler = event => {
         setnbToAdd(event.target.value);
     }

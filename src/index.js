@@ -10,10 +10,10 @@ import store  from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <Routess />
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode> 
 );
 

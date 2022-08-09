@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getProductByCategory } from '../../../services/CategoryService';
 import { getProductsSearch } from '../../../services/ProductService';
 import { ProductCard } from './ProductCard';
@@ -7,6 +7,7 @@ import { Title } from '../../common/Title';
 export const ProductList = () => {
 
   const { categoryId } = useParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [title, setTitle] = useState("");
   useEffect(() => {
@@ -21,6 +22,7 @@ export const ProductList = () => {
       getProductByCategory(categoryId).then((res) => { 
         setProducts(res.items); 
         setTitle(res.name) })
+        .catch((err)=>{navigate("/404", {state:{categoryid: categoryId}})})
     }
     
   }, [categoryId])

@@ -1,11 +1,13 @@
 import {Link, useNavigate  } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { addProductToCart } from '../../../services/CartService';
+import { putCartData } from '../../../redux/reducers/cart/cartActions';
 
 export const AddToCartButton = (props) => {
     
     
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {cartId, name, price, image, id, nbToAdd} = props;
     const cartData = useSelector(state => state.cart);
     let data = {};
@@ -37,7 +39,7 @@ export const AddToCartButton = (props) => {
             ancientItems.push(...sameItem);
             cartData.items = ancientItems;
         }
-        addProductToCart("carts/"+cartId, cartData).then((response) => {})
+        dispatch(putCartData(cartId,cartData));
     }
    
     return(

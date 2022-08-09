@@ -3,21 +3,14 @@ import { ProductItem } from './ProductItem';
 import { ViewAllButton } from './ViewAllButton';
 
 export const ProductElement = (props) => {
-    const [viewAll, setViewAll] = useState(true);
+    const [viewAll, setViewAll] = useState(false);
     const {products, title}=props;  
     let listItem = [];
-    const threeItems = () =>{
-        console.log("threeItems", products)
-        for (let i = 0; i < 3; i++) { 
-            listItem.push(
-                <ProductItem key={i} index={i} item={products[i]}/>
-            );
-          }
-          return listItem;
-    }
+
+   
     const callback = (name) => {
         if(name){
-            setViewAll(false);
+            setViewAll(!viewAll);
         }
     }
     useEffect(()=>{},[viewAll]);
@@ -26,10 +19,15 @@ export const ProductElement = (props) => {
             <div className="single-product-widget">
                 <h2 className="product-wid-title">{title}</h2>
                 <ViewAllButton onClick={callback} />
-                {products  && !viewAll && threeItems() }
-                {products && viewAll && products.map((item, index) => (
-                    <ProductItem key={index} index={index} item={item}/>
-                    ))}
+                {products &&  products.map((item, index) => {
+                    if(viewAll){
+                        return <ProductItem key={index} index={index} item={item}/>
+                    }
+                    if(!viewAll && index < 3){
+                        return <ProductItem key={index} index={index} item={item}/>
+                    }
+                }
+                    )}
             </div>
         </div>
     );

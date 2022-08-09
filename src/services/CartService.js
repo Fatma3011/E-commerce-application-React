@@ -28,7 +28,6 @@ export const getCartId = (url, data) => {
     return new Promise((resolve, reject) => {
             ApiCaller.put(API_BASE_URL + url, data)
             .then((response) => {
-              
               resolve(response.data);
             })
             .catch((error) => {

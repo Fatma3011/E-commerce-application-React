@@ -1,10 +1,12 @@
 import {Link, useNavigate} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { addProductToCart } from '../../../services/CartService';
+import { putCartData } from '../../../redux/reducers/cart/cartActions';
 // il reste le input
 export const ShopTableCart = () => {
     const cartData = useSelector(state => state.cart);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     let sameItem = [];
     let ancientItems = [];
@@ -29,9 +31,8 @@ export const ShopTableCart = () => {
         });
         cartData.items = ancientItems;
 
-        addProductToCart("carts/" + cartData.id, cartData).then((response) => {
-        })
-        navigate(`/carts`);
+        dispatch(putCartData(cartData.id,cartData));
+
     }
     const minus = (e, id, name, image, price) => {
         e.preventDefault();
@@ -62,9 +63,8 @@ export const ShopTableCart = () => {
             cartData.items = ancientItems;
         }
 
-        addProductToCart("carts/" + cartData.id, cartData).then((response) => {
-        })
-        navigate(`/carts`);
+        dispatch(putCartData(cartData.id,cartData));
+
     }
     const plus = (e, id, name, image, price) => {
         e.preventDefault();
@@ -93,10 +93,9 @@ export const ShopTableCart = () => {
             cartData.items = ancientItems;
         }
         
-        
-        addProductToCart("carts/"+ cartData.id, cartData).then((response) => {
-        })
-        navigate(`/carts`);
+        dispatch(putCartData(cartData.id,cartData));
+        // addProductToCart("carts/"+ cartData.id, cartData).then((response) => {
+        // })
     }
    
     return(
@@ -132,7 +131,7 @@ export const ShopTableCart = () => {
                             </a>
                         </td>
                         <td className="product-name">
-                        <Link to="/home">{item.name}</Link>
+                        <Link to={`/product/${item.id}`}>{item.name}</Link>
                         </td>
                         <td className="product-price">
                             <span className="amount">{item.price}€</span>

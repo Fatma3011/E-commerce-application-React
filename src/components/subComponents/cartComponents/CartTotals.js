@@ -5,9 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 export const CartTotals = () => {
     const navigate = useNavigate();
     const cartData = useSelector(state => state.cart);
-    useEffect(()=>{
-        navigate(`/carts`);
-    },[cartData])
+    useEffect(()=>{},[cartData])
     return(
         cartData.items.length !== 0 ?
             <div className="cart_totals ">
