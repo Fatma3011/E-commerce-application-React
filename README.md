@@ -24,7 +24,7 @@ Welcome to the Phone Store E-commerce Web Application – a specialized platform
 
 ***Routing*** : React Router for seamless SPA browsing.
 
-***Styling*** Styling: Styled with CSS/SCSS or Styled Components.
+***Styling*** : Styled with CSS.
 
 ***Back-End Integration*** : The backend is used for data handling but not developed as part of this project.
 
@@ -71,23 +71,33 @@ The application should now be running and connected to the mock backend server.
 ## Preview
 
 
-***Start Screen Application***
+***NotFound Page***
 
-![1](https://github.com/Fatma3011/VoiceUp/blob/master/startScreen.PNG)
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/notFoundPage.png)
 
 
-***Log up Screen***
+***Home Page***
 
-![1](https://github.com/Fatma3011/VoiceUp/blob/master/logUp.PNG)
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/homePage.png)
 
-***Log in Screen***
 
-![1](https://github.com/Fatma3011/VoiceUp/blob/master/logIn.PNG)
+***Product List Page***
 
-***Friends List Screen***
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/productListPage.png)
 
-![1](https://github.com/Fatma3011/VoiceUp/blob/master/listFriends.PNG)
+***Search Page***
 
-***Discussion Screen***
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/SearchPage.png)
 
-![1](https://github.com/Fatma3011/VoiceUp/blob/master/Discussion.PNG)
+***Product Page***
+
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/ProductPage.png)
+
+***Cart Page***
+
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/CartPage.png)
+
+***Checkout Page***
+
+![1](https://github.com/Fatma3011/E-commerce-application-React/blob/master/checkoutPage.png)
+
