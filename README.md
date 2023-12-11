@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Phone Store E-commerce Web Application
+Welcome to the Phone Store E-commerce Web Application – a specialized platform designed for a seamless and engaging shopping experience in the mobile phone market. Built with React, this application utilizes modern web development approaches such as SPA (Single Page Application), HOC (Higher-Order Components), and ES6 features to deliver a dynamic and responsive user interface.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+● Développement de la partie front-end 
 
-## Available Scripts
+● Développement de la partie front-end mobile pour le chat vocal.
 
-In the project directory, you can run:
+● Cryptage des messages vocaux.
 
-### `npm start`
+● Développement d’un service d’analyse des messages vocaux et de recherche vocale dans
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+les conversations.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to use?
 
-### `npm test`
+1. Download or clone this repo.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies.
 
-### `npm run build`
+   a. For Frontend part : ReactNative
+  
+  ```
+  cd frontend/
+  ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ```js
+  npm install
+  // or
+  yarn install
+  ```
+   a. For backend part : Spring Boot
+     
+  ```
+  cd backend/
+  ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Run project on Web Browser / iOS / Android.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+ npm start
+ // or
+ npm run ios // npm run android
+ // or
+ yarn ios // yarn android
+```
+## Preview
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+***Start Screen Application***
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![1](https://github.com/Fatma3011/VoiceUp/blob/master/startScreen.PNG)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+***Log up Screen***
 
-## Learn More
+![1](https://github.com/Fatma3011/VoiceUp/blob/master/logUp.PNG)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+***Log in Screen***
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![1](https://github.com/Fatma3011/VoiceUp/blob/master/logIn.PNG)
 
-### Code Splitting
+***Friends List Screen***
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![1](https://github.com/Fatma3011/VoiceUp/blob/master/listFriends.PNG)
 
-### Analyzing the Bundle Size
+***Discussion Screen***
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![1](https://github.com/Fatma3011/VoiceUp/blob/master/Discussion.PNG)
