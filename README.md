@@ -32,6 +32,7 @@ Welcome to the Phone Store E-commerce Web Application – a specialized platform
 ## Design Patterns
 
 ***SPA (Single Page Application)*** : For an uninterrupted and fluid user experience.
+
 ***HOC (Higher-Order Components)*** : Employed for enhancing component logic reusability.
 
 ## Installation
